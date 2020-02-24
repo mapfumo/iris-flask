@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+
+
+{% block content %}
+<h3>Enter parameters to determine iris type:</h3>
+<form method="POST" action="">
+    {{ form.sepal_length.label }} {{ form.sepal_length(size=5) }}
+    {{ form.sepal_width.label }} {{ form.sepal_width(size=5) }}
+    {{ form.petal_length.label }} {{ form.petal_length(size=5) }}
+    {{ form.petal_width.label }} {{ form.petal_width(size=5) }}
+    {{ form.submit() }}
+    {{ form.hidden_tag() }}
+    </form>
+    <hr>
+    {% for error in form.sepal_length.errors %}
+        <span style="color: red;"/>
+        {{ "Error, Sepal Length: "+ error }}
+        </span>
+        <br>
+    {%  endfor %}
+    {% for error in form.sepal_width.errors %}
+        <span style="color: red;"/>
+       {{ "Error, Sepal Width: "+ error }}
+         <br>
+        </span>
+    {%  endfor %}
+    {% for error in form.petal_length.errors %}
+        <span style="color: red;"/>
+       {{ "Error, Petal Length: " + error }}
+         <br>
+        </span>
+    {%  endfor %}
+    {% for error in form.petal_width.errors %}
+        <span style="color: red;"/>
+       {{ "Error, Petal Width: " + error }}
+         <br>
+        </span>
+    {%  endfor %}
+
+
+    {% if sepal_length and sepal_width and petal_length and petal_width%}
+        <div><img src= {{ flower_file }} class="img-circle">
+        <hr></div>
+         <h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         {{ flower }}</h1>
+    {% else %}
+        <img src="data:image/png;base64,{{ image }}"/> 
+    {% endif %}
+</div>
+
+{% endblock %}
