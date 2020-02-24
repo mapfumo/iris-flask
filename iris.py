@@ -15,9 +15,9 @@ from decimal import Decimal
 from wtforms import SubmitField, DecimalField
 from wtforms.validators import InputRequired, NumberRange
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ants are great'
-bootstrap = Bootstrap(app)
+iris_app = Flask(__name__)
+iris_app.config['SECRET_KEY'] = 'ants are great'
+bootstrap = Bootstrap(iris_app)
 
 
 class IrisForm(FlaskForm):
@@ -44,15 +44,15 @@ def predict(sepal_length, sepal_width, petal_length, petal_width):
     specie = knn.predict(new_sample)
     return classes[specie[0]]
 
-@app.route('/manual')
+@iris_app.route('/manual')
 def manual():
     return render_template('manual.html')
 
-@app.route('/about')
+@iris_app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@iris_app.route('/', methods=['GET', 'POST'])
 def home():
     sepal_length = None
     sepal_width = None
@@ -86,7 +86,7 @@ def home():
                            flower=flower,
                            flower_file=flower_file)
 
-@app.route('/plot')
+@iris_app.route('/plot')
 def plot_iris():
     iris = sns.load_dataset("iris")
     sns.set(style="ticks", color_codes=True)
@@ -105,5 +105,6 @@ def plot_iris():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    #app.run(host='0.0.0.0', debug=True)
     #app.run(host='0.0.0.0')
+    iris_app.run()
