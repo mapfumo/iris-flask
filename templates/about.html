@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>About</h1>
+    </div>
+    <p>
+        The purpose of this application is to predict the variety of an iris
+        flower given its sepal width, sepal length, petal width and petal length.
+        The data is from the famous iris dataset for machine learning</p>
+
+    <p>
+        Whilst developing this application I had the following goals:-
+    <ul class="inline">
+        <li>To learn about Python Web Frameworks
+            <a href="http://flask.pocoo.org/"> (I have used Flask for this application)</a>
+        </li>
+        <li>Showcasing Python for producing a data science product</li>
+        <li>Deploying the application on <a href="https://www.heroku.com/">
+                Heroku</li></a>
+    </ul>
+    </p>
+
+    <p>
+        This application was produced using Flask, Scikit-Learn, MatplotLib,
+        Seaborn and Bootstrap.
+    <p>
+        In a future version I would like to allow the user to
+        choose the machine learning algorithm and parameters
+    </p>
+
+    <p><a href="https://github.com/mapfumo/iris-flask">Get Source - GitHub</a>
+    </p>
+
+    <br>
+    <a href="http://www.mapfumo.net">Antony Mapfumo</a> (c) 2019, 2023
+    </p>
+</div>
+{% endblock %}

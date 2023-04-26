@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom:16px; padding-bottom:5px;">
+        <h3 class="text-left mt-1 mb-3">
+            Enter the sepal width, sepal length, petal width, petal length:</h3>
+    </div>
+    <div class="border-bottom row" style="margin-bottom:16px; padding-bottom:5px;">
+        <form method="POST" action="">
+            {{ form.sepal_length.label }} {{ form.sepal_length(size=5) }}
+            {{ form.sepal_width.label }} {{ form.sepal_width(size=5) }}
+            {{ form.petal_length.label }} {{ form.petal_length(size=5) }}
+            {{ form.petal_width.label }} {{ form.petal_width(size=5) }}
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            {{ form.hidden_tag() }}
+        </form>
+    </div>
+
+    {% for error in form.sepal_length.errors %}
+    <span style="color: red;" />
+    {{ "Error, Sepal Length: "+ error }}
+    </span>
+    <br>
+    {% endfor %}
+    {% for error in form.sepal_width.errors %}
+    <span style="color: red;" />
+    {{ "Error, Sepal Width: "+ error }}
+    <br>
+    </span>
+    {% endfor %}
+    {% for error in form.petal_length.errors %}
+    <span style="color: red;" />
+    {{ "Error, Petal Length: " + error }}
+    <br>
+    </span>
+    {% endfor %}
+    {% for error in form.petal_width.errors %}
+    <span style="color: red;" />
+    {{ "Error, Petal Width: " + error }}
+    <br>
+    </span>
+    {% endfor %}
+
+
+    {% if sepal_length and sepal_width and petal_length and petal_width%}
+    <div class="text-center"><img src={{ flower_file }} class="img-circle" style="height: 400px;">
+        <hr>
+
+        <h1> {{ flower }}</h1>
+        {% else %}
+        <img src="data:image/png;base64,{{ image }}" />
+        {% endif %}
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
