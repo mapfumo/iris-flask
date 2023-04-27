@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
     python3 app.py
 
-### Installation & Hosting on Amazon EC2 (Ubuntu Server)
+#### Installation & Hosting on Amazon EC2 (Ubuntu Server)
 
     apt-get install python3 python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
 
@@ -25,14 +25,16 @@ pip install -r requirements.txt
     pip install wheel
     pip install gunicorn flask
 
-***create wsgi.py file***
+#### create wsgi.py file
+
 ---
 
     from app import app
     if __name__ == "__main__":
         app.run()
 
-***create /etc/systemd/system/iris-flask.service file***
+#### create /etc/systemd/system/iris-flask.service file
+
 ---
 
     [Unit]
@@ -51,7 +53,8 @@ pip install -r requirements.txt
     [Install]
     WantedBy=multi-user.target
 
-***Configuring Nginx to Proxy Requests***
+#### Configuring Nginx to Proxy Requests
+
 ---
 
 create /etc/nginx/sites-available/iris-flask
@@ -66,9 +69,9 @@ create /etc/nginx/sites-available/iris-flask
         }
     }
 
-***Enable and start services***
----
+#### Enable and start services
 
+---
     sudo systemctl enable iris-flask.service
     sudo systemctl start iris-flask.service
     sudo systemctl restart nginx 
