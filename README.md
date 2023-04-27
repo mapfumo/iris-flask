@@ -4,7 +4,7 @@ The scikit-learn Iris data-set consists of 3 (Setosa, Versicolour, and Virginica
 
 pip install -r requirements.txt
 
-### To run
+**To run**
 
     python3 app.py
 
@@ -16,7 +16,7 @@ pip install -r requirements.txt
     systemctl start nginx
     systemctl enable nginx
 
-    git clone <https://github.com/mapfumo/iris-flask.git>
+    git clone https://github.com/mapfumo/iris-flask.git
     cd iris-flask
     python3 -m venv iris-flask
     source venv/bin/activate
@@ -25,32 +25,50 @@ pip install -r requirements.txt
     pip install wheel
     pip install gunicorn flask
 
-create wsgi.py
+**create wsgi.py file**
 ---
 
     from app import app
     if __name__ == "__main__":
         app.run()
 
-create /etc/systemd/system/iris-flask.service
+**create /etc/systemd/system/iris-flask.service file**
 ---
 
-[Unit]
-Description=Gunicorn instance to serve iris-flask
-After=network.target
+    [Unit]
+    Description=Gunicorn instance to serve iris-flask
+    After=network.target
 
-[Service]
-User=root
-Group=www-data
+    [Service]
+    User=ubuntu
+    Group=www-data
 
-WorkingDirectory=/home/ubuntu/iris-flask
-Environment="PATH=/home/ubuntu/iris-flask/venv/bin"
-ExecStart=/home/ubuntu/iris-flask/venv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
+    WorkingDirectory=/home/ubuntu/iris-flask
+    Environment="PATH=/home/ubuntu/iris-flask/venv/bin"
+    ExecStart=/home/ubuntu/iris-flask/venv/bin/gunicorn --workers 3 --bind unix
+    :myproject.sock -m 007 wsgi:app
 
-[Install]
-WantedBy=multi-user.target
+    [Install]
+    WantedBy=multi-user.target
 
-## Configuring Nginx to Proxy Requests
+**Configuring Nginx to Proxy Requests**
+---
 
 create /etc/nginx/sites-available/iris-flask
 ---
+
+    server {
+        listen 80;
+
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/home/ubuntu/iris-flask/myproject.sock;
+        }
+    }
+
+*** Enable and start services
+---
+
+    sudo systemctl enable iris-flask.service
+    sudo systemctl start iris-flask.service
+    sudo systemctl restart nginx 
