@@ -37,8 +37,7 @@ The scikit-learn Iris data-set consists of 3 (Setosa, Versicolour, and Virginica
 
     WorkingDirectory=/home/ubuntu/iris-flask
     Environment="PATH=/home/ubuntu/iris-flask/venv/bin"
-    ExecStart=/home/ubuntu/iris-flask/venv/bin/gunicorn --workers 3 --bind unix
-    :myproject.sock -m 007 wsgi:app
+    ExecStart=/home/ubuntu/iris-flask/venv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
 
     [Install]
     WantedBy=multi-user.target
