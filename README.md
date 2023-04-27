@@ -2,12 +2,6 @@
 
 The scikit-learn Iris data-set consists of 3 (Setosa, Versicolour, and Virginica) species (50 samples per species, for a total of 150 samples) of the iris flower. Each sample has four measurements: sepal length, sepal width, petal length, petal width. Given these measurements a machine learning model can predict the iris specie with a high degree of accuracy. Here I demonstrate a machine learning web application using Python, Scikit-Learn machine learning library and Flask web framework.
 
-pip install -r requirements.txt
-
-**To run**
-
-    python3 app.py
-
 #### Installation & Hosting on Amazon EC2 (Ubuntu Server)
 
     apt-get install python3 python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
@@ -27,15 +21,11 @@ pip install -r requirements.txt
 
 #### create wsgi.py file
 
----
-
     from app import app
     if __name__ == "__main__":
         app.run()
 
 #### create /etc/systemd/system/iris-flask.service file
-
----
 
     [Unit]
     Description=Gunicorn instance to serve iris-flask
@@ -55,10 +45,7 @@ pip install -r requirements.txt
 
 #### Configuring Nginx to Proxy Requests
 
----
-
 create /etc/nginx/sites-available/iris-flask
----
 
     server {
         listen 80;
@@ -71,7 +58,6 @@ create /etc/nginx/sites-available/iris-flask
 
 #### Enable and start services
 
----
     sudo systemctl enable iris-flask.service
     sudo systemctl start iris-flask.service
     sudo systemctl restart nginx 
