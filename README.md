@@ -25,14 +25,14 @@ pip install -r requirements.txt
     pip install wheel
     pip install gunicorn flask
 
-**create wsgi.py file**
+***create wsgi.py file***
 ---
 
     from app import app
     if __name__ == "__main__":
         app.run()
 
-**create /etc/systemd/system/iris-flask.service file**
+***create /etc/systemd/system/iris-flask.service file***
 ---
 
     [Unit]
@@ -51,7 +51,7 @@ pip install -r requirements.txt
     [Install]
     WantedBy=multi-user.target
 
-**Configuring Nginx to Proxy Requests**
+***Configuring Nginx to Proxy Requests***
 ---
 
 create /etc/nginx/sites-available/iris-flask
@@ -66,7 +66,7 @@ create /etc/nginx/sites-available/iris-flask
         }
     }
 
-*** Enable and start services
+***Enable and start services***
 ---
 
     sudo systemctl enable iris-flask.service
